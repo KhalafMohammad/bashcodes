@@ -1,0 +1,45 @@
+#!/bin/bash
+
+while true; do
+sleep 2
+echo "0" > /sys/class/gpio/gpio17/value
+echo "1" > /sys/class/gpio/gpio27/value
+echo "1" > /sys/class/gpio/gpio22/value
+sleep 5
+echo "1" > /sys/class/gpio/gpio17/value
+echo "1" > /sys/class/gpio/gpio27/value
+echo "0" > /sys/class/gpio/gpio22/value
+sleep 5
+echo "1" > /sys/class/gpio/gpio17/value
+echo "0" > /sys/class/gpio/gpio27/value
+echo "1" > /sys/class/gpio/gpio22/value
+done
+
+#!/bin/bash
+
+# Stop de daemon
+
+sudo systemctl stop my_daemon.service
+
+# Check als de daemon is nog aan?
+if sudo systemctl is-active --quiet my_daemon.service; then
+  # als de daemon is nog aan, stuur SIGKILL signal
+  sudo systemctl kill -s SIGKILL my_daemon.service
+fi
+
+
+=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/=/
+
+
+
+#!/bin/bash
+
+# Start de daemon
+sudo systemctl start my_daemon.service
+
+# Check als de daemon is nog aan?
+if sudo systemctl is-active --quiet my_daemon.service; then
+  echo "Daemon started successfully"
+else
+  echo "Failed to start daemon"
+fi
